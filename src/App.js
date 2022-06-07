@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Route, Routes } from 'react-router';
+import { BrowserRouter, Link } from 'react-router-dom';
+import { data } from './data';
+import Details from './pages/Details';
+import Home from './pages/Home';
+import Welcome from './pages/Welcome';
+
+
 
 function App() {
+  
+  const [Moviec, setMoviec] = useState(data)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+      <div>
+      <ul>
+            <li><Link className="active" to="/">Welcome</Link></li>
+            <li><Link className="active" to="/home">Movies</Link></li>
+            
+        </ul>
+      </div>
+    <Routes>
+      
+      <Route  path="/"  element={<Welcome />} />
+      <Route  path="/Home"  element={<Home />} />
+      <Route  path="/Details/:id"  element={<Details Moviec={Moviec}/>} />
+        
+    </Routes>
+  </BrowserRouter>
+      
     </div>
   );
 }
